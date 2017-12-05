@@ -26,6 +26,7 @@ public class AdicionarActivity extends AppCompatActivity {
 
 
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -37,37 +38,31 @@ public class AdicionarActivity extends AppCompatActivity {
         sPostos = (Spinner) findViewById(R.id.sPostos);
 
     }
-
+    // feita comparação km anterior
     public void salvar(View v){
 
         Realm realm = Realm.getDefaultInstance();
         realm.beginTransaction();
 
 
-
         Abastecimento a = realm.createObject(Abastecimento.class);
 
         Double atual= Double.parseDouble(etKm.getText().toString());
 
-        RealmResults<Abastecimento> result1  = realm.where(Abastecimento.class).findAllSorted("kmA", Sort.DESCENDING);
-        Abastecimento x =  result1.first();
+        RealmResults<Abastecimento> result1  = realm.where(Abastecimento.class).findAll();
+        Abastecimento x = result1.first();
 
-
-        // TODO: 04/12/17 CODIGO PARA VERIFICAR KM
-       /* Double anterior = Double.valueOf(x.getKmA());
-        if(atual < x.getKmA() ){
+        if(atual < x.getKmA()){
             Toast.makeText(this, "Erro KM", Toast.LENGTH_SHORT).show();
-        }
-        else {*/
-
+            return;
+        }else{
             a.setKmA(Double.parseDouble(etKm.getText().toString()));
             a.setLitros(Double.parseDouble(etLitros.getText().toString()));
             a.setData(etData.getText().toString());
             a.setPosto(sPostos.getSelectedItem().toString());
 
             realm.copyFromRealm(a);
-
-        //}
+        }
 
         realm.commitTransaction();
         finish();

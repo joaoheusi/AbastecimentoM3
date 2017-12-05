@@ -12,19 +12,21 @@ import android.widget.Toast;
 /**
  * Created by joaomheusi on 27/11/17.
  */
+// funcoes em static
 
 public class Abastecimento extends RealmObject implements Serializable {
 
-    private static Double ultimoKm ;
     private String data;
-    private Double litros;
-    private Double kmA;
+    private double litros;
+    private double kmA;
     private String posto;
+
     public Abastecimento() {
 
     }
 
-    public ArrayList<Abastecimento> recuperaLista(View view){
+
+    public static ArrayList<Abastecimento> recuperaLista(View view){
         Realm realm = Realm.getDefaultInstance();
 
         RealmResults<Abastecimento> result1    = realm.where(Abastecimento.class).findAll();
@@ -37,15 +39,17 @@ public class Abastecimento extends RealmObject implements Serializable {
         return a;
     }
 
-    public Double retornaAutonomia(){
+
+    public static double retornaAutonomia(){
+//        return 0.0;
         Realm realm = Realm.getDefaultInstance();
 
         RealmResults<Abastecimento> result1    = realm.where(Abastecimento.class).findAll();
         ArrayList<Abastecimento> a = new ArrayList<>();
-        Double AuxKm = 0.0;
-        Double AuxL = 0.0;
-        Double min =0.0;
-        Double max =0.0;
+        double AuxKm = 0.0;
+        double AuxL = 0.0;
+        double min =0.0;
+        double max =0.0;
         for(int i = 0; i < result1.size(); i++){
             Abastecimento atual = result1.get(i);
             AuxKm+= atual.getKmA();
@@ -67,9 +71,6 @@ public class Abastecimento extends RealmObject implements Serializable {
         return (max-min)/AuxL;
 
     }
-    public double retornaUltimoKm(){
-        return ultimoKm;
-    };
     public String getData() {
         return data;
     }
@@ -82,7 +83,7 @@ public class Abastecimento extends RealmObject implements Serializable {
         return litros;
     }
 
-    public void setLitros(Double litros) {
+    public void setLitros(double litros) {
         this.litros = litros;
     }
 
@@ -90,7 +91,7 @@ public class Abastecimento extends RealmObject implements Serializable {
         return kmA;
     }
 
-    public void setKmA(Double kmA) {
+    public void setKmA(double kmA) {
         this.kmA = kmA;
     }
 
