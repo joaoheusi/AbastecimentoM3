@@ -1,0 +1,14 @@
+<resources>
+    <string name="app_name">ExercicioRecyclerView</string>
+
+    <string name="postos_prompt">Selecione um Posto</string>
+
+    <string-array name="postos_arrays">
+        <item>Shell</item>
+        <item>Ipiranga</item>
+        <item>Petrobras</item>
+        <item>Texaco</item>
+        <item>Outros</item>
+    </string-array>
+
+</resources>
